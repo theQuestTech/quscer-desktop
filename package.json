@@ -1,6 +1,6 @@
 {
   "name": "quscer-desktop",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Quscer OS desktop app",
   "main": "main.js",
   "author": "The Quest Tech",
@@ -31,12 +31,12 @@
       "allowToChangeInstallationDirectory": true
     },
     "publish": [
-  {
-    "provider": "github",
-    "owner": "theQuestTech",
-    "repo": "quscer-desktop",
-    "releaseType": "release"
-  }
-]
+      {
+        "provider": "github",
+        "owner": "theQuestTech",
+        "repo": "quscer-desktop",
+        "releaseType": "release"
+      }
+    ]
   }
 }

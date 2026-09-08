@@ -1,6 +1,6 @@
 {
   "name": "quscer-desktop",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Quscer OS desktop app",
   "main": "main.js",
   "author": "The Quest Tech",
@@ -25,6 +25,11 @@
     "win": {
       "target": "nsis",
       "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.business"
     },
     "nsis": {
       "oneClick": false,

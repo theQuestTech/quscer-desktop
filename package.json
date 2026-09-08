@@ -31,11 +31,12 @@
       "allowToChangeInstallationDirectory": true
     },
     "publish": [
-      {
-        "provider": "github",
-        "owner": "theQuestTech",
-        "repo": "quscer-desktop"
-      }
-    ]
+  {
+    "provider": "github",
+    "owner": "theQuestTech",
+    "repo": "quscer-desktop",
+    "releaseType": "release"
+  }
+]
   }
 }

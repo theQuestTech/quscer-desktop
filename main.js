@@ -3,7 +3,7 @@ const path = require('path');
 const { autoUpdater } = require('electron-updater');
 
 // Change this if you ever move to a custom domain
-const APP_URL = 'https://quscer-frontend.vercel.app';
+const APP_URL = 'https://app.quscer.com';
 
 let mainWindow;
 let tray;

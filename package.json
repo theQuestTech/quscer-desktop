@@ -29,11 +29,13 @@
     "mac": {
       "target": "dmg",
       "icon": "assets/icon.icns",
-      "category": "public.app-category.business"
+      "category": "public.app-category.business",
+      "artifactName": "Quscer-OS-mac-${arch}.${ext}"
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "Quscer-OS-Setup.${ext}"
     },
     "publish": [
       {

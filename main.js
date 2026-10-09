@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Tray, Menu } = require('electron');
+const { app, BrowserWindow, Tray, Menu, session } = require('electron');
 const path = require('path');
 const { autoUpdater } = require('electron-updater');
 
@@ -7,6 +7,17 @@ const APP_URL = 'https://app.quscer.com';
 
 let mainWindow;
 let tray;
+
+// The sign-in is kept in the page's storage, which Electron writes to disk a little
+// later. Write it now, so quitting (or Windows shutting down, or an update restarting
+// the app) never loses a just-renewed sign-in and logs the person out.
+function saveSignIn() {
+  try {
+    session.defaultSession.flushStorageData();
+  } catch {
+    // nothing to save yet
+  }
+}
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -30,7 +41,11 @@ function createWindow() {
       event.preventDefault();
       mainWindow.hide();
     }
+    saveSignIn();
   });
+
+  mainWindow.on('hide', saveSignIn);
+  mainWindow.on('blur', saveSignIn);
 }
 
 function createTray() {
@@ -63,7 +78,18 @@ app.whenReady().then(() => {
 
 app.on('before-quit', () => {
   app.isQuitting = true;
+  saveSignIn();
 });
+
+// Windows shutting down or signing out skips the normal quit.
+app.on('ready', () => {
+  const { powerMonitor } = require('electron');
+  powerMonitor.on('shutdown', saveSignIn);
+  powerMonitor.on('suspend', saveSignIn);
+});
+
+// Also every minute, in case the app is ended some other way (Task Manager, power cut).
+setInterval(saveSignIn, 60 * 1000);
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) createWindow();
